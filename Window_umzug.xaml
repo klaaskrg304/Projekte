@@ -1,0 +1,215 @@
+﻿<Window 
+    
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="Raps.Window_umzug"
+    Title="Sternberg und Mehr eV." Height="920" Width="1680"    WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="/Raps-steht-in-voller-Bluete-braucht-Waerme-und-Insekten.jpg">
+    <Window.Resources>
+
+        <Style TargetType="DataGrid" x:Key="ModernDataGridStyle">
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="CanUserAddRows" Value="False" />
+            <Setter Property="ColumnHeaderHeight" Value="40" />
+            <Setter Property="RowHeight" Value="35" />
+            <Setter Property="GridLinesVisibility" Value="Horizontal" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#FFDDDDDD" />
+            <Setter Property="VerticalGridLinesBrush" Value="#FFDDDDDD" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="BorderBrush" Value="#DDDDDD" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="RowBackground" Value="White" />
+            <Setter Property="AlternatingRowBackground" Value="#FFCCC9C9" />
+
+            <Setter Property="ColumnHeaderStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="#FF5F6163" />
+                        <Setter Property="Foreground" Value="#FFF7F7F7" />
+                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                        <Setter Property="FontWeight" Value="Bold" />
+                        <Setter Property="FontSize" Value="20" />
+                        <Setter Property="Padding" Value="10,5,10,5" />
+                        <Setter Property="BorderBrush" Value="#DDDDDD" />
+                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="CellStyle">
+                <Setter.Value>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="10,5,10,5" />
+                        <Setter Property="BorderBrush" Value="#DDDDDD" />
+                        <Setter Property="BorderThickness" Value="0,0,1,1" />
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Foreground" Value="#333" />
+            <Setter Property="Background" Value="#FFF" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="BorderBrush" Value="#CCC" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Grid>
+                            <Border x:Name="border" 
+                            Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            CornerRadius="5">
+                                <ScrollViewer x:Name="PART_ContentHost" 
+                                      Margin="0" 
+                                      VerticalScrollBarVisibility="Hidden" 
+                                      HorizontalScrollBarVisibility="Hidden" />
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#2196F3" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#2196F3" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Definiere den Style für die allgemeinen Buttons -->
+        <Style x:Key="ModernButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#FF339DFF"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)"
+                                                To="#FF007ACC"
+                                                Duration="0:0:0.3"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)"
+                                                To="#FF339DFF"
+                                                Duration="0:0:0.3"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#FF005A99"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <DropShadowEffect x:Key="DefaultShadow" 
+                  BlurRadius="20"
+                  ShadowDepth="1"
+                  Direction="270"
+                  Color="Black"
+                  Opacity="0.4"  />
+
+        <!-- Definiere den Style für die speziellen Buttons -->
+        <Style x:Key="SpecialButtonStyle" TargetType="{x:Type Button}">
+
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="20">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+    </Window.Resources>
+    <Grid Margin="0,0,0,10">
+        <Grid.ColumnDefinitions>
+            <!-- Definiere eine Spalte für den vertikalen Streifen -->
+            <ColumnDefinition Width="Auto"/>
+            <!-- Definiere eine Spalte für den Rest des Fensters -->
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Vertikaler farbiger Streifen -->
+
+        <!-- Vertikaler farbiger Streifen -->
+        <!-- Buttons auf der linken Seite -->
+
+        <!-- DataGrid im restlichen Fenster -->
+
+        <Canvas Margin="31,461,520,76" Grid.Column="1">
+            <Canvas.Style>
+                <Style/>
+            </Canvas.Style>
+            <TextBox x:Name="tbx_Firma" Height="45" Style="{StaticResource ModernTextBox}"  Effect="{StaticResource DefaultShadow}" Canvas.Left="440" TextWrapping="Wrap" Canvas.Top="40" Width="220" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <TextBox x:Name="tbx_anspr" Height="45" Style="{StaticResource ModernTextBox}"  Effect="{StaticResource DefaultShadow}" Canvas.Left="440" TextWrapping="Wrap" Canvas.Top="114" Width="219" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox x:Name="tbx_adress" Height="70" Style="{StaticResource ModernTextBox}"  Effect="{StaticResource DefaultShadow}" Canvas.Left="440" TextWrapping="Wrap" Canvas.Top="188" Width="222" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16"/>
+            <TextBox x:Name="tbx_pos" Height="42" Style="{StaticResource ModernTextBox}"  Effect="{StaticResource DefaultShadow}" Canvas.Left="440" TextWrapping="Wrap" Canvas.Top="282" Width="132" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="16"/>
+            <Label Content="Firma:" Canvas.Left="361" Canvas.Top="44" Height="28" Width="74" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="14" FontFamily="Segoe UI Historic" FontWeight="Bold"/>
+            <Label Content="Ansprechperson:" Canvas.Left="303" Canvas.Top="112" Height="37" Width="116" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="0.5,2.966" FontSize="14" FontFamily="Segoe UI Historic" FontWeight="Bold"/>
+            <Label Content="Adresse:" Canvas.Left="347" Canvas.Top="189" Height="28" Width="72" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" FontFamily="Segoe UI Historic" FontWeight="Bold"/>
+            <Label Content="Position:" Canvas.Left="347" Canvas.Top="279" Height="28" Width="63" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14" FontFamily="Segoe UI Historic" FontWeight="Bold"/>
+            <Button x:Name="btn_update" Height="32"  Style="{StaticResource SpecialButtonStyle}" Width="140" Click="btn_update_Click" Foreground="#FFF3F4F5" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF347AD8" FontWeight="Bold" FontFamily="Calibri" FontSize="20" Content="speichern" Canvas.Left="773" Canvas.Top="157"/>
+            <Button x:Name="btn_add" Content="hinzufügen" Height="32" Style="{StaticResource SpecialButtonStyle}" Width="144"  Click="btn_add_Click" Foreground="#FFF7F9F5" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FF449A16" FontFamily="Calibri" FontSize="20" FontWeight="Bold" Canvas.Left="773" Canvas.Top="101"/>
+            <Button x:Name="btn_clear" Content="zurücksetzen"  Style="{StaticResource SpecialButtonStyle}" Height="32" Width="144"  Click="btn_clear_Click" Foreground="#FF5F655B" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" FontFamily="Calibri" FontSize="20" Canvas.Left="773" Canvas.Top="219"/>
+            <Button x:Name="btn_delete" Content="löschen" Height="32"  Style="{StaticResource SpecialButtonStyle}" Width="144"  Click="btn_delete_Click" Foreground="#FFF9F5F5" HorizontalAlignment="Left" VerticalAlignment="Top" Background="#FFD42B2B" FontWeight="Bold" FontFamily="Calibri" FontSize="20" Canvas.Left="773" Canvas.Top="45"/>
+            <Button x:Name="btn_print" Content="drucken"  Height="32" Style="{StaticResource SpecialButtonStyle}" Width="144"  Foreground="#FF373ADC" Click="btn_print_Click" RenderTransformOrigin="0.546,2.001" HorizontalAlignment="Left" VerticalAlignment="Top" FontFamily="Calibri" FontSize="20" FontWeight="Bold" Background="#FFDCD3D3" Canvas.Left="773" Canvas.Top="282"/>
+
+
+
+        </Canvas>
+        <DockPanel   Grid.ColumnSpan="2" Effect="{StaticResource DefaultShadow}" HorizontalAlignment="Right" Height="45" LastChildFill="False" VerticalAlignment="Top" Width="1733" Background="#FF4CA4AF" Margin="0,0,-53,0"/>
+        <Grid x:Name="grid_btn" HorizontalAlignment="Center" Height="229" Margin="0,347,0,0" Effect="{StaticResource DefaultShadow}" VerticalAlignment="Top" Width="166" Background="#FF4CA4AF"/>
+        <Button x:Name="btn_umzug" Content="Umzug" Height="76" Margin="0,347,0,0" HorizontalAlignment="Center"    VerticalAlignment="Top" Foreground="#FFF5F1F1" FontSize="20" FontWeight="Bold" Background="#FF4CA4AF" BorderThickness="0" Width="166" />
+        <Button x:Name="btn_planung" Content="Planung" Height="76" Margin="0,423,0,0" HorizontalAlignment="Center"   VerticalAlignment="Top" Foreground="#FFF5F1F1" FontSize="20" FontWeight="Bold" Click="btn_planung_Click" Background="#FF4CA4AF" BorderThickness="0" Width="166" />
+        <Button x:Name="btn_kosten_2" Content="Kosten" Height="77" Margin="0,499,0,0" HorizontalAlignment="Center"  VerticalAlignment="Top" Foreground="#FFF5F1F1" FontSize="20" FontWeight="Bold" Background="#FF4CA4AF" RenderTransformOrigin="0.568,2.987" BorderThickness="0" Width="166"/>
+        <Button x:Name="btn_home" Content="Home" Height="45" VerticalAlignment="Top" Margin="0,0,34,0" Background="#FF4CA4AF" FontSize="20" FontWeight="Bold" Foreground="#FFF9EFEF" BorderThickness="0" Click="btn_home_Click" />
+        <DataGrid x:Name="dataGrid_umzug" HeadersVisibility="Column" Style="{StaticResource ModernDataGridStyle}" AutoGenerateColumns="True" VerticalAlignment="Top"
+          CanUserResizeColumns="False" 
+          CanUserResizeRows="False"
+          ColumnWidth="*"
+          EnableRowVirtualization="True" Height="412" SelectionChanged="dataGrid_umzug_SelectionChanged" Margin="131,50,90,0" Grid.Column="1"/>
+        <Button x:Name="btn_help" Content="Hilfe" HorizontalAlignment="Left" Height="45" Margin="132,0,0,0" VerticalAlignment="Top" Width="132" BorderThickness="0" Background="#FF4CA4AF" Foreground="#FFFBF9F9" FontSize="20" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <Button x:Name="btn_close" Content="Hilfe" HorizontalAlignment="Left" Height="45" Margin="1322,0,0,0" VerticalAlignment="Top" Width="132" BorderThickness="0" Background="#FF4CA4AF" Foreground="#FFFBF9F9" FontSize="20" FontWeight="Bold" Grid.Column="1" Click="btn_close_Click"/>
+        <Button x:Name="btn_mailmerge" Content="Brief" HorizontalAlignment="Left" Height="45" Margin="315,0,0,0" VerticalAlignment="Top" Width="132" BorderThickness="0" Background="#FF4CA4AF" Foreground="#FFFBF9F9" FontSize="20" FontWeight="Bold" Grid.Column="1" Click="btn_mailmerge_Click"/>
+
+    </Grid>
+</Window>
